@@ -1,0 +1,283 @@
+// BASE STYLES
+@import "./_variables"
+@import "./_mixins"
+@import "./_functions"
+// СONTROL STYLES
+@import "./_fonts"
+@import "./_reset"
+@import "./_transitions"
+// NON-PRIORITY STYLES
+@import "./_non-priority"
+
+#app
+	background: $gradient
+
+.button
+	$this: &
+	+flex(row, center, center)
+	padding: 10px 20px
+	border-radius: 20px
+	border: 1px solid $accent
+	transition: opacity $time $tFunc
+	&:disabled
+		opacity: .4
+		pointer-events: none
+	&:hover
+		#{$this}__icon
+			transform: translateX(5px)
+	&__
+		&icon
+			width: 36px
+			height: 12px
+			margin-left: 8px
+			transition: transform $time $tFunc
+		&text
+			font-weight: 500
+			font-size: 16px
+			color: $light
+.popup
+	position: fixed
+	width: 100vw
+	height: 100vh
+	left: 0
+	top: 0
+	+flex(row, center, center)
+	background: rgba(1, 1, 5, 0.9)
+	&__
+		&inner
+			background: $gradient
+			border-radius: 16px
+			max-width: 740px
+			width: 100%
+			min-height: 400px
+			position: relative
+			padding: 70px 40px 40px
+		&cross
+			position: absolute
+			right: 28px
+			top: 28px
+		&cross-icon
+			width: 15px
+			height: 15px
+
+.tabs-component-tabs
+	position: absolute
+	display: flex
+	left: 0
+	padding: 0 40px
+	top: 0
+.tabs-component-tab
+	padding-top: 20px
+	border-top: 1px solid transparent
+	transition: border $time $tFunc
+	& + .tabs-component-tab
+		margin-left: 35px
+	&.is-active
+		border-top-color: $accent
+		.tabs-component-tab-a
+			opacity: 1
+
+.tabs-component-tab-a
+	color: $light
+	opacity: .3
+	transition: opacity $time $tFunc
+
+.sign-up
+	$this: &
+	&__
+		&steps
+			+flex(row, space-between, center)
+			overflow: hidden
+			padding-bottom: 15px
+			margin-bottom: 25px
+		&step
+			position: relative
+			text-align: center
+			color: $text
+			font-weight: bold
+			padding-bottom: 20px
+			transition: color $time $tFunc
+
+			&:last-child
+				text-align: right
+				&::before
+					left: auto
+					right: 0
+					transform: translateX(0)
+			&:first-child
+				text-align: left
+				&::before
+					left: 0
+					right: auto
+					transform: translateX(0)
+			&::before
+				content: ''
+				width: 30px
+				height: 30px
+				position: absolute
+				bottom: -15px
+				left: 50%
+				transform: translateX(-50%)
+				z-index: 1
+				border-radius: 50%
+				background-color: $light
+				border: 10px solid $secondary
+				transition: border-color $time $tFunc
+			&:not(:last-child)
+				&::after
+					content: ''
+					position: absolute
+					height: 1px
+					width: 330px
+					left: 50%
+					bottom: 0
+					background-color: $secondary
+					transition: background-color $time $tFunc
+			&--active
+				color: $light
+				&::before
+					border-color: $accent
+				&::after
+					background-color: $accent !important
+		&grid
+			display: grid
+			grid-template-columns: 285px auto
+			grid-gap: 40px 43px
+		
+.accounts
+	$this: &
+	&__
+		&title
+			color: $text
+			font-size: 14px
+			margin-bottom: 15px
+
+		&label
+			opacity: .5
+			cursor: pointer
+			border: 1px solid transparent
+			border-radius: 8px
+			background-color: $acc
+			width: 100%
+			padding: 20px 16px
+			+flex(row, space-between, center)
+
+		&icon
+			height: 35px
+			width: 55px
+		&input
+			opacity: 0
+			&:checked + #{$this}__label
+				opacity: 1
+				border: 1px solid rgba(125, 119, 233, 0.2)
+				background-color: $activeAcc
+
+.form-group 
+	$this: &
+	margin-bottom: 25px
+	position: relative
+	width: 100%
+	border-bottom: 1px solid $border
+	transition: border-color $time $tFunc
+	&::before
+		content: ''
+		position: absolute
+		width: 0
+		height: 1px
+		left: 0
+		bottom: -1px
+		background-color: $active
+		transition: width $time $tFunc
+	&:focus-within
+		&::before
+			width: 100%
+	&--invalid
+		border-color: $danger
+		#{$this}__label
+			color: $danger
+	&__
+		&label 
+			display: inline-block
+			color: $text
+			font-size: 14px
+			margin-bottom: 8px
+			transition: color $time $tFunc
+			&[for] 
+			  cursor: pointer
+		&input
+			display: block
+			color: $light
+			font-size: 16px
+			width: 100%
+			padding-bottom: 8px
+			&::placeholder
+				color: $ph
+				font-size: 16px
+		&icon
+			width: 25px
+			height: 16px
+		&eye
+			position: absolute
+			right: 0
+			bottom: 7px
+			cursor: pointer
+			&--open
+				&::before
+					content: ''
+					position: absolute
+					left: 0
+					top: 7px
+					width: 25px
+					height: 1px
+					background-color: $active
+					transform: rotate(45deg)
+					transition: transform $time $tFunc
+		&sub-text
+			position: absolute
+			top: calc(100% + 7px)
+			left: 0
+			font-size: 11px
+			color: $danger
+			
+		&select 
+			width: 100%
+			cursor: pointer
+			user-select: none
+			position: relative
+			padding-bottom: 8px
+			color: $ph
+			&--opened
+				#{$this}__select-items 
+					display: block
+					z-index: 1
+					&::-webkit-scrollbar 
+						width: 4px
+					&::-webkit-scrollbar-track 
+						background: linear-gradient(#fff 0%, #fff calc(100% - 5px), transparent calc(100% - 5px), transparent 100%)
+					&::-webkit-scrollbar-thumb 
+						background: linear-gradient(#eaeff2 0%, #eaeff2 calc(100% - 5px), transparent calc(100% - 5px), transparent 100%)
+					&::-webkit-scrollbar-thumb:hover 
+						background: linear-gradient(#ddd 0%, #ddd calc(100% - 5px), transparent calc(100% - 5px), transparent 100%)
+
+				#{$this}__select-arrow 
+					transform: rotate(180deg)
+		&select-items 
+			display: none
+			position: absolute
+			top: 100%
+			left: 0
+			background: #fff
+			width: 100%
+			max-height: 250px
+			overflow-y: auto
+		&select-item 
+			padding: 8px 10px
+			cursor: pointer
+			&:hover 
+				background: #eee
+		&select-arrow 
+			position: absolute
+			right: 0
+			top: calc(50% - 4px)
+			width: 10px
+			height: 5px

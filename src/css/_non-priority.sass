@@ -1,0 +1,8 @@
+@media print
+	header,
+	footer,
+	aside
+		display: none !important
+	a[href]:not([href='']):not([href^='#'])
+		&::after
+			content: " (" attr(href) ")" !important
