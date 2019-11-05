@@ -1,4 +1,4 @@
-# nextsolx
+# DJST
 
 > A Vue.js project
 
